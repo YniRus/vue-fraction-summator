@@ -1,5 +1,3 @@
-
-
 let VueFractionSummator = new Vue({
     el: '#app',
     data: {
@@ -23,7 +21,7 @@ let VueFractionSummator = new Vue({
                     continue;
                 }
                 if(fraction.numerator && this.empty(fraction.denominator)) {
-                    this.error = 'Деление на 0';
+                    this.error = 'Division by zero';
                     return 0;
                 }
                 fractionResult += fraction.numerator / fraction.denominator;
@@ -56,13 +54,11 @@ let VueFractionSummator = new Vue({
         showMiddleSign : function (index) {
             return this.fractions.length > 1 && index !== this.fractions.length - 1;
         },
-        validateFraction : function (value) {
-            value = parseInt(value,10);
-            if(value < this.fractionMinValue) {
-                return this.fractionMinValue;
-            }
-            if(value > this.fractionMaxValue) {
-                return this.fractionMaxValue;
+        validateFractionInput : function (fraction, field) {
+            if(fraction[field] < this.fractionMinValue) {
+                fraction[field] = this.fractionMinValue;
+            } else if(fraction[field] > this.fractionMaxValue) {
+                fraction[field] = this.fractionMaxValue;
             }
         }
     },

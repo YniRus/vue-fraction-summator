@@ -20,10 +20,10 @@
             <div class="fraction-summator__fractions-container">
                 <div v-for="(fraction, index) in fractions" class="fraction-summator__block fraction-summator__block_inline-flex">
                     <div class="fraction">
-                        <div class="fraction__delete" v-bind:class="{'fraction__delete_muted' : !allowDelete}">&times;</div>
-                        <input type="number" class="fraction__numerator" v-model="fraction.numerator">
+                        <div class="fraction__delete" v-bind:class="{'fraction__delete_muted' : !allowDelete}" v-on:click="removeFraction(index)">&times;</div>
+                        <input type="number" class="fraction__numerator" v-model.number="fraction.numerator" v-on:input="validateFractionInput(fraction,'numerator')">
                         <span class="fraction__separator"></span>
-                        <input type="number" class="fraction__denominator" v-model="fraction.denominator">
+                        <input type="number" class="fraction__denominator" v-model.number="fraction.denominator" v-on:input="validateFractionInput(fraction,'denominator')">
                     </div>
                     <div v-if="showMiddleSign(index)" class="fraction__middle-sign fraction-summator__block_pt20">+</div>
                 </div>
