@@ -20,7 +20,7 @@ let VueFractionSummator = new Vue({
                 if(this.empty(fraction.numerator) && this.empty(fraction.denominator)) {
                     continue;
                 }
-                if(fraction.numerator && this.empty(fraction.denominator)) {
+                if(!this.empty(fraction.numerator) && this.empty(fraction.denominator)) {
                     this.error = 'Division by zero';
                     return 0;
                 }
@@ -35,7 +35,7 @@ let VueFractionSummator = new Vue({
     },
     methods : {
         empty : function (value) {
-            return (typeof value == 'undefined') || value == 0 ||value == null || (Array.isArray(value) && value.length == 0);
+            return typeof value == 'undefined' || value == 0 ||value == null || (Array.isArray(value) && value.length == 0);
         },
         addFraction : function () {
             if(this.fractions.length >= this.fractionsMaxCount) {
@@ -64,7 +64,7 @@ let VueFractionSummator = new Vue({
     },
     created : function () {
         for (let i = 0; i < this.fractionsInitialCount; i++) {
-            this.addFraction(this.fractionsInitialCount);
+            this.addFraction();
         }
     }
 });
