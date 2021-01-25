@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue Fraction Summator</title>
+
+    <script src="lib/vue/vue.js"></script>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/fraction-summator.css">
+    <link rel="stylesheet" href="css/fraction.css">
+</head>
+<body>
+    <div id="app">
+        <h1>Vue Fraction Summator</h1>
+        <div class="fraction-summator">
+            <div class="fraction-summator__fractions-container">
+                <div v-for="(fraction, index) in fractions" class="fraction-summator__block fraction-summator__block_inline-flex">
+                    <div class="fraction">
+                        <div class="fraction__delete" v-bind:class="{'fraction__delete_muted' : !allowDelete}">&times;</div>
+                        <input type="number" class="fraction__numerator" v-model="fraction.numerator">
+                        <span class="fraction__separator"></span>
+                        <input type="number" class="fraction__denominator" v-model="fraction.denominator">
+                    </div>
+                    <div v-if="showMiddleSign(index)" class="fraction__middle-sign fraction-summator__block_pt20">+</div>
+                </div>
+                <span class="fraction-summator__block fraction-summator__block_fs-xl fraction-summator__block_pt20">=</span>
+                <span class="fraction-summator__block fraction-summator__block_fs-xl fraction-summator__block_pt20">{{fractionResult | round}}</span>
+            </div>
+            <div class="fraction-summator__footer">
+                <div class="fraction-summator__footer-item">
+                    <div class="fraction-summator__info">{{error}}</div>
+                </div>
+                <div class="fraction-summator__footer-item">
+                    <div class="fraction-summator__add-item-button" v-on:click="addFraction">+</div>
+                    <div class="fraction-summator__add-item-text">Add new fraction</div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="js/index.js"></script>
+</body>
+</html>
